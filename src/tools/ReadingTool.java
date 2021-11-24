@@ -1,11 +1,14 @@
 package tools;
 
+import java.io.File;
+
 public class ReadingTool
 {
-	private final String workingOn;
-	public ReadingTool(final String filePath)
+	private final File workingOn;
+	public ReadingTool(final File filePath)
 	{
 		workingOn=filePath;
+		System.out.println(workingOn);
 	}
 	
 	public FunctionProp read()
@@ -13,7 +16,7 @@ public class ReadingTool
 		return null; //TODO: work on this
 	}
 	
-	public String getWorkingOn()
+	public File getWorkingOn()
 	{
 		return workingOn;
 	}
