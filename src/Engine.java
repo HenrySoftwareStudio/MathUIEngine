@@ -8,6 +8,7 @@ import java.io.Serializable;
 
 import javax.swing.JButton;
 import javax.swing.JFileChooser;
+import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
 public class Engine implements Serializable
@@ -33,6 +34,18 @@ public class Engine implements Serializable
 			return layout;
 		}
 	}
+	public class UIBehavior
+	{
+		private int WindowClosing;
+		public UIBehavior()
+		{
+			WindowClosing=JFrame.EXIT_ON_CLOSE;
+		}
+		public int getWindowClosing()
+		{
+			return WindowClosing;
+		}
+	}
 
 	/**
 	 * 
@@ -41,6 +54,7 @@ public class Engine implements Serializable
 	
 	public static Engine self;
 	private UIElements elementsOnThis;
+	private UIBehavior behaviorOnThis;
 	private Window window;
 	private final Runnable[] runnables=
 		{
@@ -51,7 +65,9 @@ public class Engine implements Serializable
 					public void run()
 					{
 						elementsOnThis = new UIElements();
+						behaviorOnThis = new UIBehavior();
 						window.getSelf().setLayout(elementsOnThis.getLayout());
+						window.getSelf().setDefaultCloseOperation(behaviorOnThis.getWindowClosing());
 						JButton button = elementsOnThis.getLoadButton();
 						button.setText("Load Tool Set");
 						button.addActionListener(new ActionListener()
@@ -60,7 +76,7 @@ public class Engine implements Serializable
 							@Override
 							public void actionPerformed(ActionEvent e)
 							{
-								JFileChooser jfc = new JFileChooser("");
+								JFileChooser jfc = new JFileChooser(System.getProperty("user.dir"));
 								jfc.setVisible(true);
 								new ReadingTool(jfc.getSelectedFile());								
 							}
