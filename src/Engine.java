@@ -1,10 +1,13 @@
 import UI.Window;
+import tools.FunctionProp;
 import tools.ReadingTool;
 
 import java.awt.BorderLayout;
+import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.Serializable;
+import java.util.ArrayList;
 
 import javax.swing.JButton;
 import javax.swing.JFileChooser;
@@ -21,6 +24,8 @@ public class Engine implements Serializable
 		private BorderLayout layout;
 		private JTabbedPane tabbedPane;
 		private JPanel defaultPane;
+		private ArrayList<JPanel> jPanels;
+		private ArrayList<ArrayList<FunctionProp>> functionProps;
 		
 		public UIElements()
 		{
@@ -28,6 +33,18 @@ public class Engine implements Serializable
 			layout = new BorderLayout();
 			tabbedPane = new JTabbedPane();
 			defaultPane = new JPanel(true);
+			jPanels = new ArrayList<>(1);
+			functionProps = new ArrayList<>(1);
+		}
+		
+		public ArrayList<ArrayList<FunctionProp>> getFunctionProps()
+		{
+			return functionProps;
+		}
+		
+		public ArrayList<JPanel> getjPanels()
+		{
+			return jPanels;
 		}
 		
 		public JPanel getDefaultPane()
@@ -97,7 +114,11 @@ public class Engine implements Serializable
 							{
 								JFileChooser jfc = new JFileChooser(System.getProperty("user.dir"));
 								jfc.showOpenDialog(window.getSelf());
-								new ReadingTool(jfc.getSelectedFile());								
+								ReadingTool rt = new ReadingTool(jfc.getSelectedFile());
+								ArrayList<FunctionProp> functionProps = rt.read();
+								ArrayList<JPanel> list = elementsOnThis.getjPanels();
+								elementsOnThis.getFunctionProps().add(functionProps);
+								list.add(buildPanel(functionProps));
 							}
 						});
 						panel.add(button);
@@ -115,6 +136,30 @@ public class Engine implements Serializable
 			JOptionPane.showMessageDialog(null, "Error: Could Not Inintailize Engine", "Error", JOptionPane.ERROR_MESSAGE);
 		}
 		self = this;
+	}
+	
+	private JPanel buildPanel(final ArrayList<FunctionProp> functionProps)
+	{
+		JPanel jPanel = new JPanel(true);
+		jPanel.setLayout(new FlowLayout(FlowLayout.LEFT, 5, 15));
+		for (int i = 0; i < functionProps.size(); i++)
+		{
+			FunctionProp functionProp = functionProps.get(i);
+			JButton button = new JButton(functionProp.getName());
+			button.setName("Ind=" + i + "|");
+			button.setToolTipText(functionProp.getToolTipMessage());
+			button.addActionListener(new ActionListener()
+			{
+				
+				@Override
+				public void actionPerformed(ActionEvent e)
+				{
+					JOptionPane.showMessageDialog(window.getSelf(), null, functionProp.getName(), JOptionPane.QUESTION_MESSAGE);					
+				}
+			});
+			jPanel.add(button, -1);
+		}
+		return jPanel;
 	}
 
 	public static void main(String[] args)

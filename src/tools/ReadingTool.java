@@ -1,6 +1,7 @@
 package tools;
 
 import java.io.File;
+import java.util.ArrayList;
 
 public class ReadingTool
 {
@@ -11,7 +12,7 @@ public class ReadingTool
 		System.out.println(workingOn);
 	}
 	
-	public FunctionProp read()
+	public ArrayList<FunctionProp> read()
 	{
 		return null; //TODO: work on this
 	}
