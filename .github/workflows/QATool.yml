@@ -2,7 +2,7 @@ name: Lint Code Base
 
 on:
   push:
-    paths: "/src"
+    branches: [ main ]
   pull_request:
     branches: [ main ]
 jobs:
