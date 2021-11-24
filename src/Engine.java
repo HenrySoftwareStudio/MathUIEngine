@@ -10,6 +10,8 @@ import javax.swing.JButton;
 import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.JTabbedPane;
 
 public class Engine implements Serializable
 {
@@ -17,11 +19,20 @@ public class Engine implements Serializable
 	{
 		private JButton LoadButton;
 		private BorderLayout layout;
+		private JTabbedPane tabbedPane;
+		private JPanel defaultPane;
 		
 		public UIElements()
 		{
 			LoadButton = new JButton();
 			layout = new BorderLayout();
+			tabbedPane = new JTabbedPane();
+			defaultPane = new JPanel(true);
+		}
+		
+		public JPanel getDefaultPane()
+		{
+			return defaultPane;
 		}
 		
 		public JButton getLoadButton()
@@ -32,6 +43,11 @@ public class Engine implements Serializable
 		public BorderLayout getLayout()
 		{
 			return layout;
+		}
+		
+		public JTabbedPane getTabbedPane()
+		{
+			return tabbedPane;
 		}
 	}
 	public class UIBehavior
@@ -68,6 +84,9 @@ public class Engine implements Serializable
 						behaviorOnThis = new UIBehavior();
 						window.getSelf().setLayout(elementsOnThis.getLayout());
 						window.getSelf().setDefaultCloseOperation(behaviorOnThis.getWindowClosing());
+						JTabbedPane jTabbedPane = elementsOnThis.getTabbedPane();
+						jTabbedPane.setTabPlacement(JTabbedPane.TOP);
+						JPanel panel = elementsOnThis.getDefaultPane();
 						JButton button = elementsOnThis.getLoadButton();
 						button.setText("Load Tool Set");
 						button.addActionListener(new ActionListener()
@@ -77,11 +96,13 @@ public class Engine implements Serializable
 							public void actionPerformed(ActionEvent e)
 							{
 								JFileChooser jfc = new JFileChooser(System.getProperty("user.dir"));
-								jfc.setVisible(true);
+								jfc.showOpenDialog(window.getSelf());
 								new ReadingTool(jfc.getSelectedFile());								
 							}
 						});
-						window.getSelf().add(elementsOnThis.getLoadButton(), BorderLayout.CENTER);
+						panel.add(button);
+						jTabbedPane.add("default panel",panel);
+						window.getSelf().add(elementsOnThis.getTabbedPane(), BorderLayout.CENTER);
 						
 					}
 				}
