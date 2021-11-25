@@ -15,7 +15,7 @@ public class Window implements WindowListener, Serializable
 	private JFrame self;
 	public Window(final String SelfName)
 	{
-		self=new JFrame(SelfName);
+		self = new JFrame(SelfName);
 		self.addWindowListener(this);;
 	}
 	

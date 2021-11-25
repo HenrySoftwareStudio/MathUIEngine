@@ -1,29 +1,35 @@
-import UI.Window;
-import tools.FunctionProp;
-import tools.ReadingTool;
-
 import java.awt.BorderLayout;
 import java.awt.Dimension;
-import java.awt.FlowLayout;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Scanner;
 
+import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 import javax.swing.JTabbedPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
+import javax.swing.border.LineBorder;
 import javax.xml.parsers.ParserConfigurationException;
 
 import org.xml.sax.SAXException;
+
+import UI.Window;
+import tools.FunctionProp;
+import tools.Helpers;
+import tools.ReadingTool;
 
 public class Engine implements Serializable
 {
@@ -139,7 +145,8 @@ public class Engine implements Serializable
 								elementsOnThis.getFunctionProps().add(functionProps);
 								JPanel generated = buildPanel(functionProps);
 								list.add(generated);
-								jTabbedPane.add(generated, rt.getWorkingOn().getName());
+								JScrollPane jsp = new JScrollPane(generated);
+								jTabbedPane.add(jsp, rt.getWorkingOn().getName().substring(0, rt.getWorkingOn().getName().indexOf(".")));
 							}
 						});
 						panel.add(button);
@@ -162,7 +169,7 @@ public class Engine implements Serializable
 	private JPanel buildPanel(final ArrayList<FunctionProp> functionProps)
 	{
 		JPanel jPanel = new JPanel(true);
-		jPanel.setLayout(new FlowLayout(FlowLayout.LEFT, 5, 15));
+		jPanel.setLayout(new BoxLayout(jPanel, BoxLayout.Y_AXIS));
 		for (int i = 0; i < functionProps.size(); i++)
 		{
 			FunctionProp functionProp = functionProps.get(i);
@@ -187,6 +194,7 @@ public class Engine implements Serializable
 					}
 					JTextArea textArea = new JTextArea();
 					textArea.setEditable(false);
+					textArea.setBorder(LineBorder.createBlackLineBorder());
 					JButton enter = new JButton("Enter");
 					enter.addActionListener(new ActionListener()
 					{
@@ -194,8 +202,47 @@ public class Engine implements Serializable
 						@Override
 						public void actionPerformed(ActionEvent e)
 						{
-							// TODO Auto-generated method stub
-							
+							boolean good = false;
+							for (int j = 0; j < textFields.length; j++)
+							{
+								good = (textFields[j].getText().matches("\\d"));
+							}
+							if (good)
+							{
+								try
+								{
+									float[] fs = new float[functionProp.getInputFieldCount()];
+									for (int i = 0; i < fs.length; i++)
+									{
+										fs[i] = Float.parseFloat(textFields[i].getText());
+									}
+									String result = run(functionProp.getLaunchArg(), fs);
+									textArea.setText(result);
+								}
+								catch (IOException | InterruptedException e1)
+								{
+									textArea.setText("Error: cannot run command");
+									e1.printStackTrace();
+								}
+							}
+						}
+
+						private String run(String launchArg, float[] args) throws IOException, InterruptedException
+						{
+							String arg = launchArg.substring(launchArg.indexOf("{") + 1, launchArg.indexOf("}"));
+							arg = arg.replace("[values]", Helpers.getContentOfFloatArray(args));
+							Runtime rt = Runtime.getRuntime();
+							System.out.print(arg);
+							Process process = rt.exec(arg);
+							String ret = "";
+							process.waitFor();
+							Scanner sc = new Scanner(new BufferedReader(new InputStreamReader(process.getInputStream())));
+							while (sc.hasNext())
+							{
+								ret += sc.next();
+							}
+							sc.close();
+							return ret;
 						}
 					});
 					pan.add(enter);

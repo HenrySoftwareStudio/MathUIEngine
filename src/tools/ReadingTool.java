@@ -15,6 +15,8 @@ import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
 
+import tools.FunctionProp.AnsType;
+
 public class ReadingTool
 {
 	private final File workingOn;
@@ -32,20 +34,18 @@ public class ReadingTool
         doc.getDocumentElement().normalize();
 	    dbf.setFeature(XMLConstants.FEATURE_SECURE_PROCESSING, true);
         NodeList MainNodeList = doc.getElementsByTagName("function");
-        System.out.println(MainNodeList.item(0));
         for (int temp = 0; temp < MainNodeList.getLength(); temp++) 
         {
         	Node node = MainNodeList.item(temp);
         	if (node.getNodeType() == Node.ELEMENT_NODE) 
 	        {
         		Element idvFunction = (Element) node;
-        		System.out.print(node);
         		String name = idvFunction.getAttribute("name");
         		String launchArgs = idvFunction.getAttribute("launchArgs");
 				String tooltip = idvFunction.getAttribute("tooltip");
 				int valueCount = Integer.parseInt(idvFunction.getAttribute("valuesCount"));
-				System.out.print("Here");
-				ret.add(new FunctionProp(name, launchArgs, tooltip, valueCount));    		
+				AnsType type = FunctionProp.makeType(idvFunction.getAttribute("answerType"));
+				ret.add(new FunctionProp(name, launchArgs, tooltip, valueCount, type));    		
 	        }
         }
 		return ret;
