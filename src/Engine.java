@@ -3,18 +3,27 @@ import tools.FunctionProp;
 import tools.ReadingTool;
 
 import java.awt.BorderLayout;
+import java.awt.Dimension;
 import java.awt.FlowLayout;
+import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.IOException;
 import java.io.Serializable;
 import java.util.ArrayList;
 
 import javax.swing.JButton;
 import javax.swing.JFileChooser;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTabbedPane;
+import javax.swing.JTextArea;
+import javax.swing.JTextField;
+import javax.xml.parsers.ParserConfigurationException;
+
+import org.xml.sax.SAXException;
 
 public class Engine implements Serializable
 {
@@ -101,6 +110,8 @@ public class Engine implements Serializable
 						behaviorOnThis = new UIBehavior();
 						window.getSelf().setLayout(elementsOnThis.getLayout());
 						window.getSelf().setDefaultCloseOperation(behaviorOnThis.getWindowClosing());
+						window.getSelf().setLocationRelativeTo(null);
+						window.getSelf().setMinimumSize(new Dimension(400, 400));
 						JTabbedPane jTabbedPane = elementsOnThis.getTabbedPane();
 						jTabbedPane.setTabPlacement(JTabbedPane.TOP);
 						JPanel panel = elementsOnThis.getDefaultPane();
@@ -115,10 +126,20 @@ public class Engine implements Serializable
 								JFileChooser jfc = new JFileChooser(System.getProperty("user.dir"));
 								jfc.showOpenDialog(window.getSelf());
 								ReadingTool rt = new ReadingTool(jfc.getSelectedFile());
-								ArrayList<FunctionProp> functionProps = rt.read();
+								ArrayList<FunctionProp> functionProps = new ArrayList<>(1);
+								try
+								{
+									functionProps = rt.read();
+								}
+								catch (ParserConfigurationException | SAXException | IOException e1)
+								{
+									e1.printStackTrace();
+								}
 								ArrayList<JPanel> list = elementsOnThis.getjPanels();
 								elementsOnThis.getFunctionProps().add(functionProps);
-								list.add(buildPanel(functionProps));
+								JPanel generated = buildPanel(functionProps);
+								list.add(generated);
+								jTabbedPane.add(generated, rt.getWorkingOn().getName());
 							}
 						});
 						panel.add(button);
@@ -154,7 +175,32 @@ public class Engine implements Serializable
 				@Override
 				public void actionPerformed(ActionEvent e)
 				{
-					JOptionPane.showMessageDialog(window.getSelf(), null, functionProp.getName(), JOptionPane.QUESTION_MESSAGE);					
+					GridLayout layout = new GridLayout(functionProp.getInputFieldCount() + 3, 1);
+					JPanel pan = new JPanel(layout, true);
+					JLabel name = new JLabel(functionProp.getName(), JLabel.CENTER);
+					pan.add(name);
+					JTextField[] textFields = new JTextField[functionProp.getInputFieldCount()];
+					for(int i = 0; i < textFields.length; i++)
+					{ 
+						textFields[i] = new JTextField();
+						pan.add(textFields[i]);
+					}
+					JTextArea textArea = new JTextArea();
+					textArea.setEditable(false);
+					JButton enter = new JButton("Enter");
+					enter.addActionListener(new ActionListener()
+					{
+						
+						@Override
+						public void actionPerformed(ActionEvent e)
+						{
+							// TODO Auto-generated method stub
+							
+						}
+					});
+					pan.add(enter);
+					pan.add(textArea);
+					JOptionPane.showMessageDialog(window.getSelf(), pan, functionProp.getName(), JOptionPane.PLAIN_MESSAGE);					
 				}
 			});
 			jPanel.add(button, -1);
