@@ -1,7 +1,9 @@
 # MathUIEngine
 ##  
 ### Statues:
-- [![Lint Code Base](https://github.com/HenrySoftwareStudio/MathUIEngine/actions/workflows/QATool.yml/badge.svg)](https://github.com/HenrySoftwareStudio/MathUIEngine/actions/workflows/QATool.yml)
+- [![Lint Code Base-AutoScan](https://github.com/HenrySoftwareStudio/MathUIEngine/actions/workflows/QATool-AutoScan.yml/badge.svg)](https://github.com/HenrySoftwareStudio/MathUIEngine/actions/workflows/QATool-AutoScan.yml)
+- [![Lint Code Base](https://github.com/HenrySoftwareStudio/MathUIEngine/actions/workflows/QATool-FullScan.yml/badge.svg)](https://github.com/HenrySoftwareStudio/MathUIEngine/actions/workflows/QATool-FullScan.yml)
+- [![Auto Release](https://github.com/HenrySoftwareStudio/MathUIEngine/actions/workflows/autoRelease.yml/badge.svg)](https://github.com/HenrySoftwareStudio/MathUIEngine/actions/workflows/autoRelease.yml)
 ### Usage:
 Using xml formating.\
 Format as below, [values] must be kept as is while args can be changed to suit needs.\
