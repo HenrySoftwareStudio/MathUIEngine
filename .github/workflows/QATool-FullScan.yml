@@ -4,14 +4,11 @@ on:
   workflow_dispatch:
     
 jobs:
-  readout:
-    runs-on: ubuntu-latest
-    steps:
-      - run: echo "Quality Assurance-Full Scan-Manual Activation"
-  
   run-lint:
     runs-on: ubuntu-latest
     steps:
+      - run: echo "Quality Assurance-Full Scan-Manual Activation"
+    
       - name: Checkout code
         uses: actions/checkout@v2
         with:
