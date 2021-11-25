@@ -1,4 +1,5 @@
 # MathUIEngine
+[![Lint Code Base](https://github.com/HenrySoftwareStudio/MathUIEngine/actions/workflows/QATool.yml/badge.svg?event=workflow_run)](https://github.com/HenrySoftwareStudio/MathUIEngine/actions/workflows/QATool.yml)
 ### Usage:
 using xml formating.\
 format as below, [values] must be kept as is while args can be changed to suit needs.\
