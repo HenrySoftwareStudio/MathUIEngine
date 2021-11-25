@@ -9,20 +9,30 @@ on:
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
-  # This workflow contains a single job called "build"
+  run-lint:
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo "Quality Assurance-Full Scan-Manual Activation"
+      - name: Checkout code
+        uses: actions/checkout@v2
+        with:
+        # Full git history is needed to get a proper list of changed files within `super-linter`
+          fetch-depth: 0
+
+      - name: Lint Code Base
+        uses: github/super-linter@v4
+        env:
+           VALIDATE_ALL_CODEBASE: true
+           DEFAULT_BRANCH: main
+           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+  
   build:
+    needs: [run-lint]
     # The type of runner that the job will run on
     runs-on: ubuntu-latest
 
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
-      - name: Full Security Check
-        uses: peter-evans/repository-dispatch@v1
-        with:
-          token: ${{ secrets.REPO_ACCESS_TOKEN }}
-          repository: username/my-repo
-          event-type: my-event
-          client-payload: '{"ref": "${{ github.ref }}", "sha": "${{ github.sha }}"}'
     
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v2
