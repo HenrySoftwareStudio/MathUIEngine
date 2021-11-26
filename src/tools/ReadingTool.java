@@ -17,42 +17,43 @@ import org.xml.sax.SAXException;
 
 import tools.FunctionProp.AnsType;
 
-public class ReadingTool
-{
+public class ReadingTool {
 	private final File workingOn;
-	public ReadingTool(final File filePath)
-	{
+
+	public ReadingTool(final File filePath) {
 		workingOn = filePath;
 	}
-	
-	public ArrayList<FunctionProp> read() throws ParserConfigurationException, SAXException, IOException
-	{
+
+	/**
+	 * @return
+	 * @throws ParserConfigurationException
+	 * @throws SAXException
+	 * @throws IOException
+	 */
+	public ArrayList<FunctionProp> read() throws ParserConfigurationException, SAXException, IOException {
 		ArrayList<FunctionProp> ret = new ArrayList<>(1);
 		DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
-        DocumentBuilder db = dbf.newDocumentBuilder();
-        Document doc = db.parse(workingOn);
-        doc.getDocumentElement().normalize();
-	    dbf.setFeature(XMLConstants.FEATURE_SECURE_PROCESSING, true);
-        NodeList MainNodeList = doc.getElementsByTagName("function");
-        for (int temp = 0; temp < MainNodeList.getLength(); temp++) 
-        {
-        	Node node = MainNodeList.item(temp);
-        	if (node.getNodeType() == Node.ELEMENT_NODE) 
-	        {
-        		Element idvFunction = (Element) node;
-        		String name = idvFunction.getAttribute("name");
-        		String launchArgs = idvFunction.getAttribute("launchArgs");
+		DocumentBuilder db = dbf.newDocumentBuilder();
+		Document doc = db.parse(workingOn);
+		doc.getDocumentElement().normalize();
+		dbf.setFeature(XMLConstants.FEATURE_SECURE_PROCESSING, true);
+		NodeList MainNodeList = doc.getElementsByTagName("function");
+		for (int temp = 0; temp < MainNodeList.getLength(); temp++) {
+			Node node = MainNodeList.item(temp);
+			if (node.getNodeType() == Node.ELEMENT_NODE) {
+				Element idvFunction = (Element) node;
+				String name = idvFunction.getAttribute("name");
+				String launchArgs = idvFunction.getAttribute("launchArgs");
 				String tooltip = idvFunction.getAttribute("tooltip");
 				int valueCount = Integer.parseInt(idvFunction.getAttribute("valuesCount"));
 				AnsType type = FunctionProp.makeType(idvFunction.getAttribute("answerType"));
-				ret.add(new FunctionProp(name, launchArgs, tooltip, valueCount, type));    		
-	        }
-        }
+				ret.add(new FunctionProp(name, launchArgs, tooltip, valueCount, type));
+			}
+		}
 		return ret;
 	}
-	
-	public File getWorkingOn()
-	{
+
+	public File getWorkingOn() {
 		return workingOn;
 	}
 

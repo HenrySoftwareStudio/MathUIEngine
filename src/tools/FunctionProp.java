@@ -2,16 +2,14 @@ package tools;
 
 import java.io.Serializable;
 
-public class FunctionProp implements Serializable
-{
-	public enum AnsType
-	{
-		FULL("f"),
-		PARTIAL("p");
+public class FunctionProp implements Serializable {
+	public enum AnsType {
+		FULL("f"), PARTIAL("p");
 
-		AnsType(String string){}
+		AnsType(String string) {
+		}
 	}
-	
+
 	/**
 	 * 
 	 */
@@ -22,8 +20,9 @@ public class FunctionProp implements Serializable
 	private final AnsType type;
 	private final int LookupKey;
 	private final int inputFieldCount;
-	public FunctionProp(final String Name, final String LaunchArg, final String TooltipMessage, final int InputFieldCount, final AnsType Type)
-	{
+
+	public FunctionProp(final String Name, final String LaunchArg, final String TooltipMessage,
+			final int InputFieldCount, final AnsType Type) {
 		name = Name;
 		launchArg = LaunchArg;
 		toolTipMessage = TooltipMessage;
@@ -31,49 +30,41 @@ public class FunctionProp implements Serializable
 		type = Type;
 		LookupKey = hashCode();
 	}
-	
-	public String getLaunchArg()
-	{
+
+	public String getLaunchArg() {
 		return launchArg;
 	}
-	
-	public String getName()
-	{
+
+	public String getName() {
 		return name;
 	}
-	
-	public String getToolTipMessage()
-	{
+
+	public String getToolTipMessage() {
 		return toolTipMessage;
 	}
-	
-	public int getLookupKey()
-	{
+
+	public int getLookupKey() {
 		return LookupKey;
 	}
-	
-	public int getInputFieldCount()
-	{
+
+	public int getInputFieldCount() {
 		return inputFieldCount;
 	}
-	
-	public AnsType getType()
-	{
+
+	public AnsType getType() {
 		return type;
 	}
-	
-	public static AnsType makeType(final String code)
-	{
-		if (code.equalsIgnoreCase("Full"))
-		{
+
+	/**
+	 * @param code
+	 * @return
+	 */
+	public static AnsType makeType(final String code) {
+		if (code.equalsIgnoreCase("Full")) {
 			return AnsType.FULL;
-		}
-		else if (code.equalsIgnoreCase("Partial")) 
-		{
+		} else if (code.equalsIgnoreCase("Partial")) {
 			return AnsType.PARTIAL;
-		}
-		else
-		{
+		} else {
 			throw new IllegalArgumentException(code + " has no corresponding ENUM Code");
 		}
 	}
