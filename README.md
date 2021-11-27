@@ -1,7 +1,7 @@
 # [MathUIEngine](https://github.com/HenrySoftwareStudio/MathUIEngine)
 ##  NOTE: DO NOT MESS WITH MY ACTIONS
 ### Statues:
-- [![Lint Code Base-AutoScan](https://github.com/HenrySoftwareStudio/MathUIEngine/actions/workflows/QATool-AutoScan.yml/badge.svg)](https://github.com/HenrySoftwareStudio/MathUIEngine/actions/workflows/QATool-AutoScan.yml)
+- [![Lint Code Base-AutoScan](https://github.com/HenrySoftwareStudio/MathUIEngine/actions/workflows/QATool-AutoScan.yml/badge.svg)](https://github.com/HenrySoftwareStudio/MathUIEngine/actions/workflows/QATool-AutoScan.yml) for [index.html](index.html)
 - [![Lint Code Base](https://github.com/HenrySoftwareStudio/MathUIEngine/actions/workflows/QATool-FullScan.yml/badge.svg)](https://github.com/HenrySoftwareStudio/MathUIEngine/actions/workflows/QATool-FullScan.yml)
 - [![Auto Release](https://github.com/HenrySoftwareStudio/MathUIEngine/actions/workflows/autoRelease.yml/badge.svg)](https://github.com/HenrySoftwareStudio/MathUIEngine/actions/workflows/autoRelease.yml)
 - [![GitGuardian scan](https://github.com/HenrySoftwareStudio/MathUIEngine/actions/workflows/GitGuardian%20Scan.yml/badge.svg)](https://github.com/HenrySoftwareStudio/MathUIEngine/actions/workflows/GitGuardian%20Scan.yml)
