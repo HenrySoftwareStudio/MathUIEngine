@@ -1,5 +1,5 @@
 # [MathUIEngine](https://github.com/HenrySoftwareStudio/MathUIEngine)
-##  NOTE: DO NOT MESS WITH MY ACTIONS
+##  NOTE: DO NOT MESS WITH MY ACTIONS, *ESPECIALLY AUTO RELEASE*
 ### Statues:
 - [![Lint Code Base-AutoScan](https://github.com/HenrySoftwareStudio/MathUIEngine/actions/workflows/QATool-AutoScan.yml/badge.svg)](https://github.com/HenrySoftwareStudio/MathUIEngine/actions/workflows/QATool-AutoScan.yml)
 - [![Lint Code Base](https://github.com/HenrySoftwareStudio/MathUIEngine/actions/workflows/QATool-FullScan.yml/badge.svg)](https://github.com/HenrySoftwareStudio/MathUIEngine/actions/workflows/QATool-FullScan.yml)
