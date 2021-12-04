@@ -24,8 +24,8 @@ jobs:
         with:
           repo_token: "${{ secrets.GITHUB_TOKEN }}"
           automatic_release_tag: "Latest"
-          prerelease: true
-          title: "Development Build"
+          prerelease: false
+          title: "Finished"
           files: |
             LICENSE.txt
             *.zip
