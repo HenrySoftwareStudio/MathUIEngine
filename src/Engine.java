@@ -130,11 +130,25 @@ public class Engine implements Serializable {
 					list.add(generated);
 					JScrollPane jsp = new JScrollPane(generated);
 					jTabbedPane.add(jsp,
-							rt.getWorkingOn().getName().substring(0, rt.getWorkingOn().getName().indexOf(".")));
+							makeName(rt, jTabbedPane), jTabbedPane.getTabCount());
+				}
+				
+				private String makeName(final ReadingTool readingTool, final JTabbedPane jtp) {
+					String Name = readingTool.getWorkingOn().getName().substring(0, readingTool.getWorkingOn().getName().indexOf("."));
+					String NewName = "";
+					if (jtp.indexOfTab(Name) != -1) {
+						for (int i = 1; i < Integer.MAX_VALUE; i ++) {
+							NewName = String.format("%s(%d)", Name, i);
+							if (jtp.indexOfTab(NewName) == -1) {
+								return NewName;
+							}
+						}
+					}
+					return Name;
 				}
 			});
 			panel.add(button);
-			jTabbedPane.add("default panel", panel);
+			jTabbedPane.add("Home", panel);
 			window.getSelf().add(elementsOnThis.getTabbedPane(), BorderLayout.CENTER);
 
 		}
@@ -172,6 +186,7 @@ public class Engine implements Serializable {
 					}
 					JTextArea textArea = new JTextArea();
 					textArea.setEditable(false);
+					textArea.setLineWrap(true);
 					textArea.setBorder(LineBorder.createBlackLineBorder());
 					JButton enter = new JButton("Enter");
 					enter.addActionListener(/**
@@ -211,7 +226,6 @@ public class Engine implements Serializable {
 											launchArg.indexOf("}"));
 									arg = arg.replace("[values]", Helpers.getContentOfFloatArray(args));
 									Runtime rt = Runtime.getRuntime();
-									System.out.print(arg);
 									Process process = rt.exec(arg);
 									String ret = "";
 									process.waitFor();
@@ -221,6 +235,9 @@ public class Engine implements Serializable {
 										ret += sc.next();
 									}
 									sc.close();
+									if (ret.isEmpty()) {
+										ret = "No Answer, Program Selected is either not working correctly or is not set up";
+									}
 									return ret;
 								}
 							});
