@@ -1,6 +1,7 @@
 # [MathUIEngine](https://github.com/HenrySoftwareStudio/MathUIEngine)
 ##  NOTE: DO NOT MESS WITH MY ACTIONS, *ESPECIALLY AUTO RELEASE*
 ### Statues:
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/3f67907fe5d042e5bef72b092b7e63cb)](https://app.codacy.com/gh/HenrySoftwareStudio/MathUIEngine?utm_source=github.com&utm_medium=referral&utm_content=HenrySoftwareStudio/MathUIEngine&utm_campaign=Badge_Grade_Settings)
 - [![Codacy Badge](https://app.codacy.com/project/badge/Coverage/3f67907fe5d042e5bef72b092b7e63cb)](https://www.codacy.com/gh/import-brain/basic_calc/dashboard?utm_source=github.com&utm_medium=referral&utm_content=import-brain/basic_calc&utm_campaign=Badge_Coverage)
 - [![Lint Code Base-AutoScan](https://github.com/HenrySoftwareStudio/MathUIEngine/actions/workflows/QATool-AutoScan.yml/badge.svg)](https://github.com/HenrySoftwareStudio/MathUIEngine/actions/workflows/QATool-AutoScan.yml)
 - [![Lint Code Base](https://github.com/HenrySoftwareStudio/MathUIEngine/actions/workflows/QATool-FullScan.yml/badge.svg)](https://github.com/HenrySoftwareStudio/MathUIEngine/actions/workflows/QATool-FullScan.yml)
