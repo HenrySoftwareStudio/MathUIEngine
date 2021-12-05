@@ -20,7 +20,6 @@ public class Window implements WindowListener, Serializable {
 	public Window(final String SelfName) {
 		self = new JFrame(SelfName);
 		self.addWindowListener(this);
-		;
 	}
 
 	public JFrame getSelf() {
