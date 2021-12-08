@@ -10,6 +10,7 @@
 ### Want To Leave Your Mark?
 > Fork this repo\
 > **THEN LOOK AT THE [CODE OF CONDUCT](https://github.com/HenrySoftwareStudio/MathUIEngine/blob/main/CODE_OF_CONDUCT.md) FIRST**\
+> **THEN LOOK AT THE [CONTRIBUTING](https://github.com/HenrySoftwareStudio/MathUIEngine/blob/main/CONTRIBUTING.md) NEXT**\
 > Do what ever you want with it at your own fork\
 > Create a PR\
 > And you are set, Code owner will be checking over the PR asap
