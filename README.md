@@ -6,6 +6,17 @@
 - [![Lint Code Base](https://github.com/HenrySoftwareStudio/MathUIEngine/actions/workflows/QATool-FullScan.yml/badge.svg)](https://github.com/HenrySoftwareStudio/MathUIEngine/actions/workflows/QATool-FullScan.yml)
 - [![Auto Release](https://github.com/HenrySoftwareStudio/MathUIEngine/actions/workflows/autoRelease.yml/badge.svg)](https://github.com/HenrySoftwareStudio/MathUIEngine/actions/workflows/autoRelease.yml)
 - [![GitGuardian scan](https://github.com/HenrySoftwareStudio/MathUIEngine/actions/workflows/GitGuardian%20Scan.yml/badge.svg)](https://github.com/HenrySoftwareStudio/MathUIEngine/actions/workflows/GitGuardian%20Scan.yml)
+
+### Want To Leave Your Mark?
+> Fork this repo\
+> **THEN LOOK AT THE [CODE OF CONDUCT](https://github.com/HenrySoftwareStudio/MathUIEngine/blob/main/CODE_OF_CONDUCT.md) FIRST**\
+> Do what ever you want with it at your own fork\
+> Create a PR\
+> And you are set, Code owner will be checking over the PR asap
+
+### Want To Use this Program?
+I don't care what you do with it as long as it is under the license term.
+
 ### Usage:
 Using xml formating.\
 Format as below, [values] must be kept as is while args can be changed to suit needs.\
