@@ -15,7 +15,7 @@
 > And you are set, Code owner will be checking over the PR asap
 
 ### Want To Use this Program?
-I don't care what you do with it as long as it is under the license term.
+I don't care what you do with it as long as it is under the [license terms](https://github.com/HenrySoftwareStudio/MathUIEngine/blob/main/LICENSE.txt).
 
 ### Usage:
 Using xml formating.\
