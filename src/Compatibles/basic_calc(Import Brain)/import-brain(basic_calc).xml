@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<functions>
+	<function name="Add" launchArgs='{python "Compatibles\basic_calc(Import Brain)\calc.py" headless 1 [values]}' tooltip="Add Tool" valuesCount="2" answerType="full"></function>
+	<function name="Subtract" launchArgs='{python "Compatibles\basic_calc(Import Brain)\calc.py" headless 2 [values]}' tooltip="Subtract Tool" valuesCount="2" answerType="full"></function>
+	<function name="Multiply" launchArgs='{python "Compatibles\basic_calc(Import Brain)\calc.py" headless 3 [values]}' tooltip="Mutiply Tool" valuesCount="2" answerType="full"></function>
+	<function name="Divide" launchArgs='{python "Compatibles\basic_calc(Import Brain)\calc.py" headless 4 [values]}' tooltip="Divide Tool" valuesCount="2" answerType="full"></function>
+	<function name="Exponent" launchArgs='{python "Compatibles\basic_calc(Import Brain)\calc.py" headless 5 [values]}' tooltip="Exponent(to the power of) Tool" valuesCount="2" answerType="full"></function>
+	<function name="Modulo" launchArgs='{python "Compatibles\basic_calc(Import Brain)\calc.py" headless 6 [values]}' tooltip="Modulo/Remainder Tool" valuesCount="2" answerType="full"></function>
+</functions>
