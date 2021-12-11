@@ -29,10 +29,20 @@ import org.xml.sax.SAXException;
 import UI.Window;
 import tools.FunctionProp;
 import tools.FunctionProp.AnsType;
-import tools.Helpers;
+import tools.Utility;
 import tools.ReadingTool;
 
 public class Engine implements Serializable {
+	
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 6276476245807073086L;
+	private UIElements elementsOnThis;
+	private UIBehavior behaviorOnThis;
+	private Window window;
+	
 	public class UIElements {
 		private JButton LoadButton;
 		private BorderLayout layout;
@@ -87,15 +97,6 @@ public class Engine implements Serializable {
 		}
 	}
 
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 6276476245807073086L;
-
-	public static Engine self;
-	private UIElements elementsOnThis;
-	private UIBehavior behaviorOnThis;
-	private Window window;
 	private final Runnable[] runnables = { new Runnable() {
 
 		@Override
@@ -160,7 +161,6 @@ public class Engine implements Serializable {
 			JOptionPane.showMessageDialog(null, "Error: Could Not Inintailize Engine", "Error",
 					JOptionPane.ERROR_MESSAGE);
 		}
-		self = this;
 	}
 
 	private JPanel buildPanel(final ArrayList<FunctionProp> functionProps) {
@@ -188,6 +188,7 @@ public class Engine implements Serializable {
 					textArea.setEditable(false);
 					textArea.setLineWrap(true);
 					textArea.setBorder(LineBorder.createBlackLineBorder());
+					JScrollPane jScrollPane = new JScrollPane(textArea);
 					JButton enter = new JButton("Enter");
 					enter.addActionListener(/**
 											 * @author also me
@@ -224,7 +225,7 @@ public class Engine implements Serializable {
 										throws IOException, InterruptedException {
 									String arg = launchArg.substring(launchArg.indexOf("{") + 1,
 											launchArg.indexOf("}"));
-									arg = arg.replace("[values]", Helpers.getContentOfFloatArray(args));
+									arg = arg.replace("[values]", Utility.getContentOfFloatArray(args));
 									Runtime rt = Runtime.getRuntime();
 									Process process = rt.exec(arg);
 									String ret = "";
@@ -242,7 +243,7 @@ public class Engine implements Serializable {
 								}
 							});
 					pan.add(enter);
-					pan.add(textArea);
+					pan.add(jScrollPane);
 					JOptionPane.showMessageDialog(window.getSelf(), pan, functionProp.getName(),
 							JOptionPane.PLAIN_MESSAGE);
 				}

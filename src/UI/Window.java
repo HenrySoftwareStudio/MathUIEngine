@@ -20,6 +20,7 @@ public class Window implements WindowListener, Serializable {
 	public Window(final String SelfName) {
 		self = new JFrame(SelfName);
 		self.addWindowListener(this);
+		;
 	}
 
 	public JFrame getSelf() {
@@ -34,7 +35,7 @@ public class Window implements WindowListener, Serializable {
 		try {
 			if (ParallelRun) {
 				for (Runnable runnable : runnables) {
-					new Thread(runnable, "thread " + runnable.toString()).run();
+					new Thread(runnable, "thread " + runnable.toString()).start();
 				}
 			} else {
 				for (Runnable runnable : runnables) {
@@ -50,37 +51,37 @@ public class Window implements WindowListener, Serializable {
 
 	@Override
 	public void windowOpened(WindowEvent e) {
-
+		//No Use Yet
 	}
 
 	@Override
 	public void windowClosing(WindowEvent e) {
-
+		//No Use Yet
 	}
 
 	@Override
 	public void windowClosed(WindowEvent e) {
-
+		//No Use Yet
 	}
 
 	@Override
 	public void windowIconified(WindowEvent e) {
-
+		//No Use Yet
 	}
 
 	@Override
 	public void windowDeiconified(WindowEvent e) {
-
+		//No Use Yet
 	}
 
 	@Override
 	public void windowActivated(WindowEvent e) {
-
+		//No Use Yet
 	}
 
 	@Override
 	public void windowDeactivated(WindowEvent e) {
-
+		//No Use Yet
 	}
 
 }
