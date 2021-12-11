@@ -1,13 +1,12 @@
-# [HenrySoftwareStudio](https://henrysoftwarestudio.github.io/)/[MathUIEngine](https://github.com/HenrySoftwareStudio/MathUIEngine)
-#  NOTE: DO NOT MESS WITH MY ACTIONS, *ESPECIALLY AUTO RELEASE*
-## Statues:
+# [HenrySoftwareStudio](https://henrysoftwarestudio.github.io/)/[MathUIEngine](https://github.com/HenrySoftwareStudio/MathUIEngine)<br> NOTE: DO NOT MESS WITH MY ACTIONS, **ESPECIALLY `AUTO RELEASE`**
+## Statues
 - [![Codacy Badge](https://app.codacy.com/project/badge/Grade/0fc8cfdbe3dc4b7e8af30bb560185487)](https://www.codacy.com/gh/HenrySoftwareStudio/MathUIEngine/dashboard?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=HenrySoftwareStudio/MathUIEngine&amp;utm_campaign=Badge_Grade)
 - [![Lint Code Base-AutoScan](https://github.com/HenrySoftwareStudio/MathUIEngine/actions/workflows/QATool-AutoScan.yml/badge.svg)](https://github.com/HenrySoftwareStudio/MathUIEngine/actions/workflows/QATool-AutoScan.yml)
 - [![Lint Code Base](https://github.com/HenrySoftwareStudio/MathUIEngine/actions/workflows/QATool-FullScan.yml/badge.svg)](https://github.com/HenrySoftwareStudio/MathUIEngine/actions/workflows/QATool-FullScan.yml)
 - [![Auto Release](https://github.com/HenrySoftwareStudio/MathUIEngine/actions/workflows/autoRelease.yml/badge.svg)](https://github.com/HenrySoftwareStudio/MathUIEngine/actions/workflows/autoRelease.yml)
 - [![GitGuardian scan](https://github.com/HenrySoftwareStudio/MathUIEngine/actions/workflows/GitGuardian%20Scan.yml/badge.svg)](https://github.com/HenrySoftwareStudio/MathUIEngine/actions/workflows/GitGuardian%20Scan.yml)
 
-## Want To Leave Your Mark?
+## To Leave Your Mark
 > Fork this repo (or not)\
 > **THEN LOOK AT THE [CODE OF CONDUCT](https://github.com/HenrySoftwareStudio/MathUIEngine/blob/main/CODE_OF_CONDUCT.md) FIRST**\
 > **THEN LOOK AT THE [CONTRIBUTING](https://github.com/HenrySoftwareStudio/MathUIEngine/blob/main/CONTRIBUTING.md) NEXT**\
@@ -15,14 +14,14 @@
 > Create a PR\
 > And you are set, Code owner will be checking over the PR asap
 
-## Note To Managers and Others Who Has Edit Rights:
+## Note To Managers and Others Who Has Edit Rights
 **When you finish reviewing a PR, do NOT delete the originating branch**\
 This is do for convenient reverts in case it is needed.
 
-## Want To Use this Program?
+## To Use this Program
 I don't care what you do with it as long as it is under the [license terms](https://github.com/HenrySoftwareStudio/MathUIEngine/blob/main/LICENSE.txt).
 
-## Make a Program Usable for this Program:
+## Make a Program Usable for this Program
 Using xml formating.\
 Format as below, [values] must be kept as is while args can be changed to suit needs.\
 Note that the block of values is where values are fed into you program, values count property will tell the engine how many values fields to initiate, first value will be the first in the value block and second will follow.\
