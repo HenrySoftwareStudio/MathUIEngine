@@ -1,2 +1,2 @@
-/.circleci/ @import_brain
-* @HenrySoftwareStudio
+!/.circleci/ @HenrySoftwareStudio
+/.circleci/ @import_brain @HenrySoftwareStudio
