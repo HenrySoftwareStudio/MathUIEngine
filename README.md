@@ -5,6 +5,7 @@
 - [![Lint Code Base](https://github.com/HenrySoftwareStudio/MathUIEngine/actions/workflows/QATool-FullScan.yml/badge.svg)](https://github.com/HenrySoftwareStudio/MathUIEngine/actions/workflows/QATool-FullScan.yml)*Disabled, Please ignore.*
 - [![Auto Release](https://github.com/HenrySoftwareStudio/MathUIEngine/actions/workflows/autoRelease.yml/badge.svg)](https://github.com/HenrySoftwareStudio/MathUIEngine/actions/workflows/autoRelease.yml)
 - [![GitGuardian scan](https://github.com/HenrySoftwareStudio/MathUIEngine/actions/workflows/GitGuardian%20Scan.yml/badge.svg)](https://github.com/HenrySoftwareStudio/MathUIEngine/actions/workflows/GitGuardian%20Scan.yml)
+- [![CodeFactor](https://www.codefactor.io/repository/github/henrysoftwarestudio/mathuiengine/badge)](https://www.codefactor.io/repository/github/henrysoftwarestudio/mathuiengine)
 
 ## To Leave Your Mark
 > Fork this repo (or not)\
