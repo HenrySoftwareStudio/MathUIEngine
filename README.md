@@ -6,7 +6,6 @@
 - [![Auto Release](https://github.com/HenrySoftwareStudio/MathUIEngine/actions/workflows/autoRelease.yml/badge.svg)](https://github.com/HenrySoftwareStudio/MathUIEngine/actions/workflows/autoRelease.yml)
 - [![GitGuardian scan](https://github.com/HenrySoftwareStudio/MathUIEngine/actions/workflows/GitGuardian%20Scan.yml/badge.svg)](https://github.com/HenrySoftwareStudio/MathUIEngine/actions/workflows/GitGuardian%20Scan.yml)
 - [![CodeFactor](https://www.codefactor.io/repository/github/henrysoftwarestudio/mathuiengine/badge)](https://www.codefactor.io/repository/github/henrysoftwarestudio/mathuiengine)
-- [![CircleCI](https://circleci.com/gh/HenrySoftwareStudio/MathUIEngine/tree/main.svg?style=svg)](https://circleci.com/gh/HenrySoftwareStudio/MathUIEngine/tree/main)*Still Wrestling With Circle, ignore temporarily*
 
 ## To Leave Your Mark
 > Fork this repo (or not)\
