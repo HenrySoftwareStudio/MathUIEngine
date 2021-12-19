@@ -7,8 +7,6 @@ on:
     - cron: "0 0 * * *"
     - cron: "0 12 * * *"
   workflow_dispatch:
-    
-
 jobs:
   scanning:
     name: GitGuardian scan
