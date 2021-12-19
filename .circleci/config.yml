@@ -1,4 +1,8 @@
 version: 2
+
+orbs: 
+  gradle: circleci/gradle@2.2.0
+
 jobs: # a collection of steps
   build:
     parallelism: 4
