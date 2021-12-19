@@ -37,7 +37,7 @@ jobs: # a collection of steps
               | sed 's/.\{6\}$//' \
               | circleci tests split --timings-type=classname)
             cd ../../..
-            gradle wrapper --gradle-version 6.6.1
+            gradle wrapper
             # Format the arguments to "./gradlew test"
             GRADLE_ARGS=$(echo $CLASSNAMES | awk '{for (i=1; i<=NF; i++) print "--tests",$i}')
             echo "Prepared arguments for Gradle: $GRADLE_ARGS"
