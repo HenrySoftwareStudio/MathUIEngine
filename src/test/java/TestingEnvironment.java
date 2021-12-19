@@ -6,9 +6,11 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.function.ThrowingSupplier;
+import org.junit.platform.commons.annotation.Testable;
 
 import UI.Engine;
 
+@Testable
 public class TestingEnvironment {
 	Engine eng;
 
@@ -20,6 +22,6 @@ public class TestingEnvironment {
     @Test
     @DisplayName("Testing generation of new Engine")
     void testEng() {
-    	
+    	eng.run();
     }
 }

@@ -156,6 +156,10 @@ public class Engine implements Serializable {
 	} };
 
 	public Engine() {
+		// Intentionally Blank
+	}
+	
+	public void run() {
 		window = new Window("Math UI Engine");
 		if (!window.toggleAfterRunnable(runnables, false)) {
 			JOptionPane.showMessageDialog(null, "Error: Could Not Inintailize Engine", "Error",
