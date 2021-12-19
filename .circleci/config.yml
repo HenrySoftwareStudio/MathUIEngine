@@ -12,13 +12,13 @@ jobs: # a collection of steps
         auth:
           username: henrythedev
           password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
-      #- image: circleci/postgres:12-alpine
-      #  auth:
-      #    username: henrythedev
-      #    password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
-      #  environment:
-      #    POSTGRES_USER: postgres
-      #    POSTGRES_DB: circle_test
+      - image: circleci/postgres:12-alpine
+        auth:
+          username: henrythedev
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
+        environment:
+          POSTGRES_USER: postgres
+          POSTGRES_DB: circle_test
     steps: # a collection of executable commands
       - checkout # check out source code to working directory
       # Read about caching dependencies: https://circleci.com/docs/2.0/caching/
