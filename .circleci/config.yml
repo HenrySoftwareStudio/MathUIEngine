@@ -54,6 +54,7 @@ jobs: # a collection of steps
           path: .circleci/test-results/test
       - store_artifacts: # Upload test results for display in Artifacts: https://circleci.com/docs/2.0/artifacts/
           path: .circleci/test-results/test
+          when: always
       - run:
           name: Assemble JAR
           command: |
@@ -65,3 +66,8 @@ jobs: # a collection of steps
       - store_artifacts:
           path: build/libs
       # See https://circleci.com/docs/2.0/deployment-integrations/ for deploy examples
+workflows:
+  version: 2
+  workflow:
+    jobs:
+    - build
