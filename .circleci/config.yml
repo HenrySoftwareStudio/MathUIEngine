@@ -64,7 +64,8 @@ jobs: # a collection of steps
           command: |
             # Skip this for other nodes
             if [ "$CIRCLE_NODE_INDEX" == 0 ]; then
-              ./gradlew assemble
+              cd ../../..
+              jar -c src/entryPoints/Entry
             fi
       # As the JAR was only assembled in the first build container, build/libs will be empty in all the other build containers.
       - store_artifacts:
