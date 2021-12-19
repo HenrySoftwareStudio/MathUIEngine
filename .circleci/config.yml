@@ -10,6 +10,7 @@ jobs: # a collection of steps
         auth:
           username: henrythedev
           password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
+    parallelism: 4
       - image: circleci/postgres:12-alpine
         auth:
           username: henrythedev
