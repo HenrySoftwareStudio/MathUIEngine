@@ -1,6 +1,7 @@
 version: 2
 jobs: # a collection of steps
   build:
+    parallelism: 2
     environment:
       # Configure the JVM and Gradle to avoid OOM errors
       _JAVA_OPTIONS: "-Xmx3g"
@@ -10,7 +11,6 @@ jobs: # a collection of steps
         auth:
           username: henrythedev
           password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
-    parallelism: 4
       - image: circleci/postgres:12-alpine
         auth:
           username: henrythedev
