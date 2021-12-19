@@ -2,6 +2,7 @@ version: 2
 jobs: # a collection of steps
   build:
     parallelism: 2
+    resource_class: large
     environment:
       # Configure the JVM and Gradle to avoid OOM errors
       _JAVA_OPTIONS: "-Xmx3g"
