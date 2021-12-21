@@ -15,17 +15,17 @@ jobs:
 
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
+      - name: set date
+      - run: echo "NOW::$(date +'%Y-%m-%dT%H:%M:%S')" >> $GITHUB_ENV
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v2
       - name: Automatic Releases
         uses: marvinpinto/action-automatic-releases@v1.2.1
         with:
           repo_token: "${{ secrets.GITHUB_TOKEN }}"
-          automatic_release_tag: tag-text-${{ steps.date.outputs.date }}
+          automatic_release_tag: "Latest $NOW"
           prerelease: true
           title: "Mk.3"
           files: |
             LICENSE.txt
             *.zip
-        env: 
-          tag-text: "Latest"
