@@ -5,10 +5,12 @@ import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Map;
 import java.util.Scanner;
 
 import javax.swing.BoxLayout;
@@ -23,14 +25,13 @@ import javax.swing.JTabbedPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.border.LineBorder;
-import javax.xml.parsers.ParserConfigurationException;
 
-import org.xml.sax.SAXException;
-
+import tools.ChangableString;
 import tools.FunctionProp;
 import tools.FunctionProp.AnsType;
-import tools.Utilities;
-import tools.ReadingTool;
+import tools.Utils;
+import tools.readingPacks.FunctionPackReadingTool;
+import tools.readingPacks.UITextReadingTool;
 
 public class Engine implements Serializable {
 	
@@ -40,19 +41,24 @@ public class Engine implements Serializable {
 	 */
 	private static final long serialVersionUID = 6276476245807073086L;
 	private UIElements elementsOnThis;
-	private UIBehavior behaviorOnThis;
 	private Window window;
 	
 	public class UIElements {
+		private UITextReadingTool UIreadingTool;
 		private JButton LoadButton;
+		private SettingPan SettingPan;
 		private BorderLayout layout;
 		private JTabbedPane tabbedPane;
 		private JPanel defaultPane;
 		private ArrayList<JPanel> jPanels;
 		private ArrayList<ArrayList<FunctionProp>> functionProps;
+		private ArrayList<Map<String, ChangableString>> listofText;
 
 		public UIElements() {
 			LoadButton = new JButton();
+			UIreadingTool = new UITextReadingTool(new File("ui.xml"), new String[] {});
+			listofText = new ArrayList<>(0);
+			SettingPan = new SettingPan(true);
 			layout = new BorderLayout();
 			tabbedPane = new JTabbedPane();
 			defaultPane = new JPanel(true);
@@ -83,84 +89,88 @@ public class Engine implements Serializable {
 		public JTabbedPane getTabbedPane() {
 			return tabbedPane;
 		}
+		
+		public SettingPan getSettingPan() {
+			return SettingPan;
+		}
+		
+		public ArrayList<Map<String, ChangableString>> getListofText() {
+			return listofText;
+		}
+		
+		public void setListofText(ArrayList<Map<String, ChangableString>> listofText) {
+			this.listofText = listofText;
+		}
+		
+		public UITextReadingTool getUIreadingTool() {
+			return UIreadingTool;
+		}
 	}
-
-	public class UIBehavior {
-		private int WindowClosing;
-
-		public UIBehavior() {
-			WindowClosing = JFrame.EXIT_ON_CLOSE;
-		}
-
-		public int getWindowClosing() {
-			return WindowClosing;
-		}
-	}
-
-	private final Runnable[] runnables = { new Runnable() {
-
-		@Override
-		public void run() {
-			elementsOnThis = new UIElements();
-			behaviorOnThis = new UIBehavior();
-			window.getSelf().setLayout(elementsOnThis.getLayout());
-			window.getSelf().setDefaultCloseOperation(behaviorOnThis.getWindowClosing());
-			window.getSelf().setLocationRelativeTo(null);
-			window.getSelf().setMinimumSize(new Dimension(400, 400));
-			JTabbedPane jTabbedPane = elementsOnThis.getTabbedPane();
-			jTabbedPane.setTabPlacement(JTabbedPane.TOP);
-			JPanel panel = elementsOnThis.getDefaultPane();
-			JButton button = elementsOnThis.getLoadButton();
-			button.setText("Load Tool Set");
-			button.addActionListener(new ActionListener() {
-
-				@Override
-				public void actionPerformed(ActionEvent e) {
-					JFileChooser jfc = new JFileChooser(System.getProperty("user.dir"));
-					jfc.showOpenDialog(window.getSelf());
-					ReadingTool rt = new ReadingTool(jfc.getSelectedFile());
-					ArrayList<FunctionProp> functionProps = new ArrayList<>(1);
-					try {
-						functionProps = rt.read();
-					} catch (ParserConfigurationException | SAXException | IOException e1) {
-						e1.printStackTrace();
-					}
-					ArrayList<JPanel> list = elementsOnThis.getjPanels();
-					elementsOnThis.getFunctionProps().add(functionProps);
-					JPanel generated = buildPanel(functionProps);
-					list.add(generated);
-					JScrollPane jsp = new JScrollPane(generated);
-					jTabbedPane.add(jsp,
-							makeName(rt, jTabbedPane), jTabbedPane.getTabCount());
-				}
-				
-				private String makeName(final ReadingTool readingTool, final JTabbedPane jtp) {
-					String Name = readingTool.getWorkingOn().getName().substring(0, readingTool.getWorkingOn().getName().indexOf("."));
-					String NewName = "";
-					if (jtp.indexOfTab(Name) != -1) {
-						for (int i = 1; i < Integer.MAX_VALUE; i ++) {
-							NewName = String.format("%s(%d)", Name, i);
-							if (jtp.indexOfTab(NewName) == -1) {
-								return NewName;
-							}
-						}
-					}
-					return Name;
-				}
-			});
-			panel.add(button);
-			jTabbedPane.add("Home", panel);
-			window.getSelf().add(elementsOnThis.getTabbedPane(), BorderLayout.CENTER);
-
-		}
-	} };
-
+	
 	public Engine() {
 		window = new Window("Math UI Engine");
-		if (!window.toggleAfterRunnable(runnables, false)) {
+		try {
+			setup();
+		} catch (Exception e) {
 			JOptionPane.showMessageDialog(null, "Error: Could Not Inintailize Engine", "Error",
 					JOptionPane.ERROR_MESSAGE);
 		}
+		window.toggleSelf();
+	}
+
+	private void setup() throws Exception {
+		elementsOnThis = new UIElements();
+		elementsOnThis.setListofText(elementsOnThis.getUIreadingTool().read());
+		window.getSelf().setLayout(elementsOnThis.getLayout());
+		window.getSelf().setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		window.getSelf().setLocationRelativeTo(null);
+		window.getSelf().setMinimumSize(new Dimension(400, 400));
+		JTabbedPane jTabbedPane = elementsOnThis.getTabbedPane();
+		jTabbedPane.setTabPlacement(JTabbedPane.TOP);
+		JPanel panel = elementsOnThis.getDefaultPane();
+		SettingPan setPanel = elementsOnThis.getSettingPan();//settingpan doesn't need to be set up as it is porpuse built and consturctor will do the setting up
+		JButton button = elementsOnThis.getLoadButton();
+		button.setText("Load Tool Set");
+		button.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				JFileChooser jfc = new JFileChooser(System.getProperty("user.dir"));
+				jfc.showOpenDialog(window.getSelf());
+				FunctionPackReadingTool rt = new FunctionPackReadingTool(jfc.getSelectedFile());
+				ArrayList<FunctionProp> functionProps = new ArrayList<>(1);
+				try {
+					functionProps = rt.read();
+				} catch (Exception e1) {
+					e1.printStackTrace();
+				}
+				ArrayList<JPanel> list = elementsOnThis.getjPanels();
+				elementsOnThis.getFunctionProps().add(functionProps);
+				JPanel generated = buildPanel(functionProps);
+				list.add(generated);
+				JScrollPane jsp = new JScrollPane(generated);
+				jTabbedPane.add(jsp,
+						makeName(rt, jTabbedPane), jTabbedPane.getTabCount() - 1);
+			}
+			
+			private String makeName(final FunctionPackReadingTool readingTool, final JTabbedPane jtp) {
+				String Name = readingTool.getWorkingOn().getName().substring(0, readingTool.getWorkingOn().getName().indexOf("."));
+				String NewName = "";
+				if (jtp.indexOfTab(Name) != -1) {
+					for (int i = 1; i < Integer.MAX_VALUE; i ++) {
+						NewName = String.format("%s(%d)", Name, i);
+						if (jtp.indexOfTab(NewName) == -1) {
+							return NewName;
+						}
+					}
+				}
+				return Name;
+			}
+		});
+		panel.add(button);
+		jTabbedPane.add("Home", panel);
+		jTabbedPane.add("Setting", setPanel);
+		window.getSelf().add(elementsOnThis.getTabbedPane(), BorderLayout.CENTER);
 	}
 
 	private JPanel buildPanel(final ArrayList<FunctionProp> functionProps) {
@@ -225,7 +235,7 @@ public class Engine implements Serializable {
 										throws IOException, InterruptedException {
 									String arg = launchArg.substring(launchArg.indexOf("{") + 1,
 											launchArg.indexOf("}"));
-									arg = arg.replace("[values]", Utilities.getContentOfFloatArray(args));
+									arg = arg.replace("[values]", Utils.getContentOfFloatArray(args));
 									Runtime rt = Runtime.getRuntime();
 									Process process = rt.exec(arg);
 									String ret = "";
