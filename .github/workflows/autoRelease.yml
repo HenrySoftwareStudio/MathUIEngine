@@ -22,8 +22,8 @@ jobs:
         with:
           repo_token: "${{ secrets.GITHUB_TOKEN }}"
           automatic_release_tag: "Latest"
-          prerelease: false
-          title: "Mk.2 and a half"
+          prerelease: true
+          title: "Mk.3"
           files: |
             LICENSE.txt
             *.zip
