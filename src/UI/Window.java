@@ -6,11 +6,14 @@ import java.io.Serializable;
 
 import javax.swing.JFrame;
 
+import prgm.events.senders.OnTextSizeChangeSender;
+import prgm.events.subscribers.OnTextSizeChange;
+
 /**
  * @author also me
  *
  */
-public class Window implements WindowListener, Serializable {
+public class Window implements WindowListener, Serializable, OnTextSizeChange {
 	/**
 	 * 
 	 */
@@ -19,6 +22,7 @@ public class Window implements WindowListener, Serializable {
 
 	public Window(final String SelfName) {
 		self = new JFrame(SelfName);
+		OnTextSizeChangeSender.subscribe(this);
 		self.addWindowListener(this);
 	}
 
@@ -28,6 +32,10 @@ public class Window implements WindowListener, Serializable {
 
 	public void toggleSelf() {
 		self.setVisible(!self.isVisible());
+	}
+	
+	public void repaint() {
+		self.repaint();
 	}
 
 	public boolean toggleAfterRunnable(final Runnable[] runnables, final boolean ParallelRun) {
@@ -83,4 +91,8 @@ public class Window implements WindowListener, Serializable {
 		//No Use Yet
 	}
 
+	@Override
+	public void onTSCEvent(int newSizeValue) {
+		this.self.repaint();
+	}
 }

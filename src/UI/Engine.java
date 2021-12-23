@@ -1,16 +1,17 @@
 package UI;
 import java.awt.BorderLayout;
 import java.awt.Dimension;
+import java.awt.Font;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.FocusEvent;
+import java.awt.event.FocusListener;
 import java.io.BufferedReader;
-import java.io.File;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.Map;
 import java.util.Scanner;
 
 import javax.swing.BoxLayout;
@@ -26,14 +27,15 @@ import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.border.LineBorder;
 
-import tools.ChangableString;
+import prgm.events.senders.OnTextSizeChangeSender;
+import prgm.events.subscribers.OnTextSizeChange;
+import prgm.prgmInfo.InitValues;
 import tools.FunctionProp;
 import tools.FunctionProp.AnsType;
 import tools.Utils;
 import tools.readingPacks.FunctionPackReadingTool;
-import tools.readingPacks.UITextReadingTool;
 
-public class Engine implements Serializable {
+public class Engine implements Serializable, FocusListener, OnTextSizeChange {
 	
 
 	/**
@@ -44,7 +46,6 @@ public class Engine implements Serializable {
 	private Window window;
 	
 	public class UIElements {
-		private UITextReadingTool UIreadingTool;
 		private JButton LoadButton;
 		private SettingPan SettingPan;
 		private BorderLayout layout;
@@ -52,13 +53,10 @@ public class Engine implements Serializable {
 		private JPanel defaultPane;
 		private ArrayList<JPanel> jPanels;
 		private ArrayList<ArrayList<FunctionProp>> functionProps;
-		private ArrayList<Map<String, ChangableString>> listofText;
 
 		public UIElements() {
 			LoadButton = new JButton();
-			UIreadingTool = new UITextReadingTool(new File("ui.xml"), new String[] {});
-			listofText = new ArrayList<>(0);
-			SettingPan = new SettingPan(true);
+			SettingPan = new SettingPan();
 			layout = new BorderLayout();
 			tabbedPane = new JTabbedPane();
 			defaultPane = new JPanel(true);
@@ -93,34 +91,24 @@ public class Engine implements Serializable {
 		public SettingPan getSettingPan() {
 			return SettingPan;
 		}
-		
-		public ArrayList<Map<String, ChangableString>> getListofText() {
-			return listofText;
-		}
-		
-		public void setListofText(ArrayList<Map<String, ChangableString>> listofText) {
-			this.listofText = listofText;
-		}
-		
-		public UITextReadingTool getUIreadingTool() {
-			return UIreadingTool;
-		}
 	}
 	
 	public Engine() {
 		window = new Window("Math UI Engine");
+		OnTextSizeChangeSender.subscribe(this);
 		try {
 			setup();
 		} catch (Exception e) {
 			JOptionPane.showMessageDialog(null, "Error: Could Not Inintailize Engine", "Error",
 					JOptionPane.ERROR_MESSAGE);
+			e.printStackTrace();
+			System.exit(1);
 		}
 		window.toggleSelf();
 	}
 
 	private void setup() throws Exception {
 		elementsOnThis = new UIElements();
-		elementsOnThis.setListofText(elementsOnThis.getUIreadingTool().read());
 		window.getSelf().setLayout(elementsOnThis.getLayout());
 		window.getSelf().setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		window.getSelf().setLocationRelativeTo(null);
@@ -128,8 +116,10 @@ public class Engine implements Serializable {
 		JTabbedPane jTabbedPane = elementsOnThis.getTabbedPane();
 		jTabbedPane.setTabPlacement(JTabbedPane.TOP);
 		JPanel panel = elementsOnThis.getDefaultPane();
-		SettingPan setPanel = elementsOnThis.getSettingPan();//settingpan doesn't need to be set up as it is porpuse built and consturctor will do the setting up
+		SettingPan setPanel = elementsOnThis.getSettingPan();//settingpan doesn't need to be set up as it is propose built and consturctor will do the setting up
+		setPanel.postInit();
 		JButton button = elementsOnThis.getLoadButton();
+		button.setFont(InitValues.DEFAULTFONT);
 		button.setText("Load Tool Set");
 		button.addActionListener(new ActionListener() {
 
@@ -141,8 +131,11 @@ public class Engine implements Serializable {
 				ArrayList<FunctionProp> functionProps = new ArrayList<>(1);
 				try {
 					functionProps = rt.read();
-				} catch (Exception e1) {
-					e1.printStackTrace();
+				} catch (IllegalArgumentException e1) {
+					//do Nothing, just leave
+					return;
+				} catch (Exception e2) {
+					e2.printStackTrace();
 				}
 				ArrayList<JPanel> list = elementsOnThis.getjPanels();
 				elementsOnThis.getFunctionProps().add(functionProps);
@@ -261,5 +254,44 @@ public class Engine implements Serializable {
 			jPanel.add(button, -1);
 		}
 		return jPanel;
+	}
+	
+	public Window getWindow() {
+		return window;
+	}
+	
+	public UIElements getElementsOnThis() {
+		return elementsOnThis;
+	}
+	
+	public void repaintAll() {
+		elementsOnThis.getDefaultPane().repaint();
+		elementsOnThis.getDefaultPane().repaint();
+		elementsOnThis.getLoadButton().repaint();
+		elementsOnThis.getSettingPan().repaint();
+		elementsOnThis.getTabbedPane().repaint();
+		repaintAllPanels();
+	}
+	
+	private void repaintAllPanels() {
+		ArrayList<JPanel> panels = elementsOnThis.getjPanels();
+		for (JPanel jPanel : panels) {
+			jPanel.repaint();
+		}
+	}
+
+	@Override
+	public void focusGained(FocusEvent e) {
+		repaintAll();
+	}
+
+	@Override
+	public void focusLost(FocusEvent e) {
+		// No use yet
+	}
+
+	@Override
+	public void onTSCEvent(int newSizeValue) {
+		elementsOnThis.getLoadButton().setFont(new Font(InitValues.TEXTFONTS, InitValues.TEXTFONTVALUE, newSizeValue));		
 	}
 }
