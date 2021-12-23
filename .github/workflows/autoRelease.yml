@@ -17,7 +17,7 @@ jobs:
     steps:
       - name: Get current time
         run: echo "TIME=$(date +"%Y-%m-%d")" >> $GITHUB_ENV
-        
+
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v2
       - name: Automatic Releases
