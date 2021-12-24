@@ -19,6 +19,7 @@
 
 ## Task List
 - Implement Multilingual Support via Reading XML File Containing UI Text
+- Implement Stored Setting Values
 
 ## Note To Managers and Others Who Has Edit Rights
 **When you finish reviewing a PR, do NOT delete the originating branch**\
