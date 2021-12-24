@@ -14,6 +14,11 @@ import prgm.events.subscribers.OnTextSizeChange;
 import prgm.prgmInfo.InitValues;
 
 public class SettingPan extends JPanel implements OnTextSizeChange {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 6460829959376157332L;
+	private Objs objs;
 	private class Objs {
 		//Configurations		
 		private GridLayout gridLayout = new GridLayout(1, 2);
@@ -62,11 +67,6 @@ public class SettingPan extends JPanel implements OnTextSizeChange {
 	public static class Values {
 		public static int textSize = InitValues.INITTEXTSIZE;
 	}
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 6460829959376157332L;
-	private Objs objs;
 
 	public SettingPan() {
 		this(true);
