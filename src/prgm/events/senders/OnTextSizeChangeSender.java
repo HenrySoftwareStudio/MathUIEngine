@@ -11,7 +11,7 @@ public class OnTextSizeChangeSender {
 		if (onTextSizeChange != null) {
 			Subs.add(onTextSizeChange);
 		} else {
-			System.out.println("failed to add this instance to list");
+			
 		}
 	}
 	

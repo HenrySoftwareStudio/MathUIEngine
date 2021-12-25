@@ -34,6 +34,7 @@ import tools.FunctionProp;
 import tools.FunctionProp.AnsType;
 import tools.Utils;
 import tools.readingPacks.FunctionPackReadingTool;
+import tools.readingPacks.SettingReader;
 
 public class Engine implements Serializable, FocusListener, OnTextSizeChange {
 	
@@ -99,7 +100,7 @@ public class Engine implements Serializable, FocusListener, OnTextSizeChange {
 		try {
 			setup();
 		} catch (Exception e) {
-			JOptionPane.showMessageDialog(null, "Error: Could Not Inintailize Engine", "Error",
+			JOptionPane.showMessageDialog(null, "Error: Could Not Inintailize Engine\n" + e.getMessage(), "Error",
 					JOptionPane.ERROR_MESSAGE);
 			e.printStackTrace();
 			System.exit(1);
@@ -117,6 +118,7 @@ public class Engine implements Serializable, FocusListener, OnTextSizeChange {
 		jTabbedPane.setTabPlacement(JTabbedPane.TOP);
 		JPanel panel = elementsOnThis.getDefaultPane();
 		SettingPan setPanel = elementsOnThis.getSettingPan();//settingpan doesn't need to be set up as it is propose built and consturctor will do the setting up
+		setPanel.setTextSizeWrap(new SettingReader(InitValues.SETTINGFILE, "TextSize").read());
 		setPanel.postInit();
 		JButton button = elementsOnThis.getLoadButton();
 		button.setFont(InitValues.DEFAULTFONT);

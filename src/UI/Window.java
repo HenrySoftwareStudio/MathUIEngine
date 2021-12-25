@@ -2,12 +2,15 @@ package UI;
 
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
+import java.io.IOException;
 import java.io.Serializable;
 
 import javax.swing.JFrame;
 
 import prgm.events.senders.OnTextSizeChangeSender;
 import prgm.events.subscribers.OnTextSizeChange;
+import prgm.prgmInfo.Vars;
+import tools.fileWriters.SettingWriter;
 
 /**
  * @author also me
@@ -63,7 +66,13 @@ public class Window implements WindowListener, Serializable, OnTextSizeChange {
 
 	@Override
 	public void windowClosing(WindowEvent e) {
-		//No Use Yet
+		try {
+			SettingWriter sr = new SettingWriter(SettingPan.SETTINGFILE);
+			sr.write(Vars.eng.getElementsOnThis().getSettingPan().getTextSizeWrap());
+			sr.close();
+		} catch (IOException e1) {
+			e1.printStackTrace();
+		}
 	}
 
 	@Override
