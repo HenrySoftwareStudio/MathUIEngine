@@ -17,9 +17,12 @@
 > Create a PR\
 > And you are set, Code owner will be checking over the PR asap
 
-## Task List
-- Implement Multilingual Support via Reading XML File Containing UI Text
-- Implement Stored Setting Values
+## Tasks
+| State | Name |
+| --- | --- |
+| Delayed | Implement Multilingual Support via Reading XML File Containing UI Text |
+| Working On | Configure and set up setting behaviors in UI |
+| Working On | Implement Stored Setting Values |
 
 ## Note To Managers and Others Who Has Edit Rights
 **When you finish reviewing a PR, do NOT delete the originating branch**\
