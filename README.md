@@ -23,10 +23,11 @@
 | Delayed | Planned earlier but then move down on priority level |
 | Working On | Currently working on this task |
 | Proposed | Planned, not yet started |
+| Complete | Task is finished, no more work will be done unless reopened by setting its status back to proposed |
 
 ### Task List
 
-| State | Name |
+| Status | Name |
 | --- | --- |
 | Delayed | Implement Multilingual Support via Reading XML File Containing UI Text |
 | Working On by @HenrySoftwareStudio | Configure and set up setting behaviors in UI |
