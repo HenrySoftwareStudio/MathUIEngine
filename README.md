@@ -31,7 +31,7 @@
 | --- | --- |
 | Delayed | Implement Multilingual Support via Reading XML File Containing UI Text |
 | Working On by @HenrySoftwareStudio | Configure and set up setting behaviors in UI |
-| Working On by @HenrySoftwareStudio | Implement Stored Setting Values |
+| Completed by @HenrySoftwareStudio at 12/30/2021 | Implement Stored Setting Values |
 
 ## Note To Managers and Others Who Has Edit Rights
 **When you finish reviewing a PR, do NOT delete the originating branch**\
