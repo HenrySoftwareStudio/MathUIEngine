@@ -16,6 +16,7 @@
 > And you are set, Code owner will be checking over the PR asap
 
 ## Tasks
+
 | State | Name |
 | --- | --- |
 | Delayed | Implement Multilingual Support via Reading XML File Containing UI Text |
