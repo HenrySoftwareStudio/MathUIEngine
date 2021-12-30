@@ -23,7 +23,7 @@
 | Delayed | Planned earlier but then move down on priority level |
 | Working On | Currently working on this task |
 | Proposed | Planned, not yet started |
-| Complete | Task is finished, no more work will be done unless reopened by setting its status back to proposed |
+| Completed | Task is finished, no more work will be done unless reopened by setting its status back to proposed |
 
 ### Task List
 
