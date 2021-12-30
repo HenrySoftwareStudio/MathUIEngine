@@ -2,25 +2,15 @@ package tools;
 
 public class SettingProperty {
 	private final String name;
-	private final String DefaultValue;
 	private String value;
 	
 	public SettingProperty() {
-		this(null, null, null);
+		this(null, null);
 	}
 	
-	/**Note: This will set value to null, please be advised
-	 * 
-	 * @param Name
-	 */
 	public SettingProperty(String Name, String InitValue) {
-		this(Name, InitValue, "");
-	}
-	
-	public SettingProperty(String Name, String InitValue, String DefaultValue) {
 		this.name = Name;
 		this.value = InitValue;
-		this.DefaultValue = DefaultValue;
 	}
 	
 	public String getName() {
@@ -28,13 +18,7 @@ public class SettingProperty {
 	}
 	
 	public String getValue() {
-		if (value != null) {
-			System.out.println(value);
-			return value;
-		} else {
-			return DefaultValue;
-		}
-		
+		return value;
 	}
 	
 	public void setValue(String value) {

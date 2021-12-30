@@ -10,13 +10,16 @@ import javax.swing.JSlider;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 
+import prgm.events.senders.OnStartUpEventSendder;
 import prgm.events.senders.OnTextSizeChangeSender;
+import prgm.events.subscribers.OnStartUpEvent;
 import prgm.events.subscribers.OnTextSizeChange;
 import prgm.prgmInfo.InitValues;
 import tools.SettingProperty;
+import tools.readingPacks.SettingReader;
 
 @SuppressWarnings("deprecation")
-public class SettingPan extends JPanel implements OnTextSizeChange {
+public class SettingPan extends JPanel implements OnTextSizeChange, OnStartUpEvent {
 	/**
 	 * 
 	 */
@@ -39,9 +42,10 @@ public class SettingPan extends JPanel implements OnTextSizeChange {
 			SizeSlider = new JSlider(JSlider.HORIZONTAL);
 			
 			TextSizeMessage.setText(String.format(cannedTextOfSizeMessage, Values.textSize));
-			TextSizeMessage.setFont(InitValues.DEFAULTFONT);
+			TextSizeMessage.setFont(new Font(InitValues.TEXTFONTS, InitValues.TEXTFONTVALUE, Values.textSize));
 			
 			SizeSlider.setSnapToTicks(true);
+			SizeSlider.setValue(Values.textSize);
 			SizeSlider.setMinimum(8);
 			SizeSlider.setMaximum(64);
 			SizeSlider.setPaintTicks(true);
@@ -94,6 +98,8 @@ public class SettingPan extends JPanel implements OnTextSizeChange {
 
 	private SettingPan(boolean isDoubleBuffered) {
 		super(isDoubleBuffered);
+		OnTextSizeChangeSender.subscribe(this);
+		OnStartUpEventSendder.subscribe(this);
 		objs = new Objs();
 		setup();
 	}
@@ -116,10 +122,6 @@ public class SettingPan extends JPanel implements OnTextSizeChange {
 		
 	}
 
-	public void postInit() {
-		OnTextSizeChangeSender.subscribe(this);		
-	}
-
 	public SettingProperty getTextSizeWrap() {
 		return this.objs.getTextSize();
 	}
@@ -127,5 +129,15 @@ public class SettingPan extends JPanel implements OnTextSizeChange {
 	public void setTextSizeWrap(SettingProperty textSize) {
 		this.objs.setTextSize(textSize);
 		OnTextSizeChangeSender.send(Integer.valueOf(textSize.getValue()));
+	}
+
+	@Override
+	public void OnSUEvent() {
+		try {
+			setTextSizeWrap(new SettingReader(InitValues.SETTINGFILE, "TextSize").read());
+			Values.textSize = Integer.valueOf(getTextSizeWrap().getValue());
+		} catch (Exception e) {
+			e.printStackTrace();
+		}		
 	}
 }

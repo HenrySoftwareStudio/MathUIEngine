@@ -27,6 +27,8 @@ import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.border.LineBorder;
 
+import UI.SettingPan.Values;
+import prgm.events.senders.OnStartUpEventSendder;
 import prgm.events.senders.OnTextSizeChangeSender;
 import prgm.events.subscribers.OnTextSizeChange;
 import prgm.prgmInfo.InitValues;
@@ -34,7 +36,6 @@ import tools.FunctionProp;
 import tools.FunctionProp.AnsType;
 import tools.Utils;
 import tools.readingPacks.FunctionPackReadingTool;
-import tools.readingPacks.SettingReader;
 
 public class Engine implements Serializable, FocusListener, OnTextSizeChange {
 	
@@ -110,6 +111,7 @@ public class Engine implements Serializable, FocusListener, OnTextSizeChange {
 
 	private void setup() throws Exception {
 		elementsOnThis = new UIElements();
+		OnStartUpEventSendder.send();
 		window.getSelf().setLayout(elementsOnThis.getLayout());
 		window.getSelf().setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		window.getSelf().setLocationRelativeTo(null);
@@ -118,10 +120,8 @@ public class Engine implements Serializable, FocusListener, OnTextSizeChange {
 		jTabbedPane.setTabPlacement(JTabbedPane.TOP);
 		JPanel panel = elementsOnThis.getDefaultPane();
 		SettingPan setPanel = elementsOnThis.getSettingPan();//settingpan doesn't need to be set up as it is propose built and consturctor will do the setting up
-		setPanel.setTextSizeWrap(new SettingReader(InitValues.SETTINGFILE, "TextSize").read());
-		setPanel.postInit();
 		JButton button = elementsOnThis.getLoadButton();
-		button.setFont(InitValues.DEFAULTFONT);
+		button.setFont(new Font(InitValues.TEXTFONTS, InitValues.TEXTFONTVALUE, Values.textSize));
 		button.setText("Load Tool Set");
 		button.addActionListener(new ActionListener() {
 
