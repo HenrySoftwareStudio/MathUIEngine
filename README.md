@@ -16,12 +16,21 @@
 > And you are set, Code owner will be checking over the PR asap
 
 ## Tasks
+### Status Names
+
+| Status Name | Definition |
+| --- | --- |
+| Delayed | Planned earlier but then move down on priority level |
+| Working On | Currently working on this task |
+| Proposed | Planned, not yet started |
+
+### Task List
 
 | State | Name |
 | --- | --- |
 | Delayed | Implement Multilingual Support via Reading XML File Containing UI Text |
-| Working On | Configure and set up setting behaviors in UI |
-| Working On | Implement Stored Setting Values |
+| Working On by @HenrySoftwareStudio | Configure and set up setting behaviors in UI |
+| Working On by @HenrySoftwareStudio | Implement Stored Setting Values |
 
 ## Note To Managers and Others Who Has Edit Rights
 **When you finish reviewing a PR, do NOT delete the originating branch**\
