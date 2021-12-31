@@ -45,7 +45,6 @@ public class SettingPan extends JPanel implements OnTextSizeChange, OnStartUpEve
 			TextSizeMessage.setFont(new Font(InitValues.TEXTFONTS, InitValues.TEXTFONTVALUE, Values.textSize));
 			
 			SizeSlider.setSnapToTicks(true);
-			SizeSlider.setValue(Values.textSize);
 			SizeSlider.setMinimum(8);
 			SizeSlider.setMaximum(64);
 			SizeSlider.setPaintTicks(true);
@@ -54,7 +53,7 @@ public class SettingPan extends JPanel implements OnTextSizeChange, OnStartUpEve
 				
 				@Override
 				public void stateChanged(ChangeEvent e) {
-					OnTextSizeChangeSender.send(Values.textSize);
+					OnTextSizeChangeSender.send(SizeSlider.getValue());
 				}
 			});
 		}
@@ -114,7 +113,7 @@ public class SettingPan extends JPanel implements OnTextSizeChange, OnStartUpEve
 	@Override
 	public void onTSCEvent(int newSizeValue) {
 		this.objs.setTextSizeOld(Values.textSize);
-		Values.textSize = this.objs.getSizeSlider().getValue();
+		Values.textSize = newSizeValue;
 		firePropertyChange("TextSizeChange", this.objs.getTextSizeOld(), Values.textSize);
 		objs.getTextSizeMessage().setFont(new Font(InitValues.TEXTFONTS, InitValues.TEXTFONTVALUE, newSizeValue));
 		objs.getTextSizeMessage().setText(String.format(objs.cannedTextOfSizeMessage, newSizeValue));
@@ -132,10 +131,11 @@ public class SettingPan extends JPanel implements OnTextSizeChange, OnStartUpEve
 	}
 
 	@Override
-	public void OnSUEvent() {
+	public void onSUEvent() {
 		try {
 			setTextSizeWrap(new SettingReader(InitValues.SETTINGFILE, "TextSize").read());
 			Values.textSize = Integer.valueOf(getTextSizeWrap().getValue());
+			objs.getSizeSlider().setValue(Values.textSize);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}		

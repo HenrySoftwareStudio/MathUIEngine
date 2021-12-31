@@ -11,7 +11,7 @@ public class OnTextSizeChangeSender {
 		if (onTextSizeChange != null) {
 			Subs.add(onTextSizeChange);
 		} else {
-			
+			throw new IllegalArgumentException("Input is null");
 		}
 	}
 	
