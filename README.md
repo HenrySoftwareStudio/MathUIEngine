@@ -30,7 +30,7 @@
 | Status | Name |
 | --- | --- |
 | Delayed | Implement Multilingual Support via Reading XML File Containing UI Text |
-| Working On by @HenrySoftwareStudio | Configure and set up setting behaviors in UI |
+| Completed? by @HenrySoftwareStudio | Configure and set up setting behaviors in UI |
 | Completed by @HenrySoftwareStudio at 12/30/2021 | Implement Stored Setting Values |
 
 ## Note To Managers and Others Who Has Edit Rights
