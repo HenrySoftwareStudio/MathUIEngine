@@ -26,7 +26,7 @@ jobs:
           repo_token: "${{ secrets.GITHUB_TOKEN }}"
           automatic_release_tag: ${{ env.TIME }}
           prerelease: false
-          title: Release@${{ env.TIME }}
+          title: Release Mk.6 @${{ env.TIME }}
           files: |
             LICENSE.txt
             *.zip
