@@ -17,16 +17,16 @@ jobs:
     steps:
       - name: Get current time
         run: echo "TIME=$(date +"%Y-%m-%d")" >> $GITHUB_ENV
-
+        
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v2
       - name: Automatic Releases
-        uses: marvinpinto/action-automatic-releases@latest
+        uses: marvinpinto/action-automatic-releases@v1.2.1
         with:
           repo_token: "${{ secrets.GITHUB_TOKEN }}"
           automatic_release_tag: ${{ env.TIME }}
           prerelease: false
-          title: Release@${{ env.TIME }}-Mk.5
+          title: Release@${{ env.TIME }}
           files: |
             LICENSE.txt
             *.zip
