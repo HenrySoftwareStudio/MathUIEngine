@@ -1,5 +1,5 @@
 package prgm.events.subscribers;
 
 public interface OnStartUpEvent {
-	public void OnSUEvent();
+	public void onSUEvent();
 }

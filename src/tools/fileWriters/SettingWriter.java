@@ -54,7 +54,6 @@ public class SettingWriter extends Writer<SettingProperty> implements Closeable 
             tfr.setOutputProperty(OutputKeys.METHOD, "xml");
             tfr.setOutputProperty(OutputKeys.ENCODING, "UTF-8");
             tfr.transform(new DOMSource(doc) , new StreamResult(new FileWriter(target, false)));
-            tfr.transform(new DOMSource(doc) , new StreamResult(System.out));
 	      } catch (Exception e) {
 	    	  e.printStackTrace();
 	      }

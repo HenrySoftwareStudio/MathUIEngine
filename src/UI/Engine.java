@@ -1,5 +1,6 @@
 package UI;
 import java.awt.BorderLayout;
+import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.GridLayout;
@@ -111,15 +112,22 @@ public class Engine implements Serializable, FocusListener, OnTextSizeChange {
 
 	private void setup() throws Exception {
 		elementsOnThis = new UIElements();
+		
 		OnStartUpEventSendder.send();
+		
 		window.getSelf().setLayout(elementsOnThis.getLayout());
 		window.getSelf().setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		window.getSelf().setLocationRelativeTo(null);
 		window.getSelf().setMinimumSize(new Dimension(400, 400));
+		
 		JTabbedPane jTabbedPane = elementsOnThis.getTabbedPane();
 		jTabbedPane.setTabPlacement(JTabbedPane.TOP);
+		jTabbedPane.setFont(new Font(InitValues.TEXTFONTS, InitValues.TEXTFONTVALUE, Values.textSize));
+		
 		JPanel panel = elementsOnThis.getDefaultPane();
+		
 		SettingPan setPanel = elementsOnThis.getSettingPan();//settingpan doesn't need to be set up as it is propose built and consturctor will do the setting up
+		
 		JButton button = elementsOnThis.getLoadButton();
 		button.setFont(new Font(InitValues.TEXTFONTS, InitValues.TEXTFONTVALUE, Values.textSize));
 		button.setText("Load Tool Set");
@@ -129,6 +137,7 @@ public class Engine implements Serializable, FocusListener, OnTextSizeChange {
 			public void actionPerformed(ActionEvent e) {
 				JFileChooser jfc = new JFileChooser(System.getProperty("user.dir"));
 				jfc.showOpenDialog(window.getSelf());
+				jfc.setFont(new Font(InitValues.TEXTFONTS, InitValues.TEXTFONTVALUE, Values.textSize));
 				FunctionPackReadingTool rt = new FunctionPackReadingTool(jfc.getSelectedFile());
 				ArrayList<FunctionProp> functionProps = new ArrayList<>(1);
 				try {
@@ -162,9 +171,11 @@ public class Engine implements Serializable, FocusListener, OnTextSizeChange {
 				return Name;
 			}
 		});
+		
 		panel.add(button);
 		jTabbedPane.add("Home", panel);
 		jTabbedPane.add("Setting", setPanel);
+		
 		window.getSelf().add(elementsOnThis.getTabbedPane(), BorderLayout.CENTER);
 	}
 
@@ -174,6 +185,7 @@ public class Engine implements Serializable, FocusListener, OnTextSizeChange {
 		for (int i = 0; i < functionProps.size(); i++) {
 			FunctionProp functionProp = functionProps.get(i);
 			JButton button = new JButton(functionProp.getName());
+			button.setFont(new Font(InitValues.TEXTFONTS, InitValues.TEXTFONTVALUE, Values.textSize));
 			button.setName("Ind=" + i + "|");
 			button.setToolTipText(functionProp.getToolTipMessage());
 			button.addActionListener(new ActionListener() {
@@ -268,7 +280,6 @@ public class Engine implements Serializable, FocusListener, OnTextSizeChange {
 	
 	public void repaintAll() {
 		elementsOnThis.getDefaultPane().repaint();
-		elementsOnThis.getDefaultPane().repaint();
 		elementsOnThis.getLoadButton().repaint();
 		elementsOnThis.getSettingPan().repaint();
 		elementsOnThis.getTabbedPane().repaint();
@@ -294,6 +305,17 @@ public class Engine implements Serializable, FocusListener, OnTextSizeChange {
 
 	@Override
 	public void onTSCEvent(int newSizeValue) {
-		elementsOnThis.getLoadButton().setFont(new Font(InitValues.TEXTFONTS, InitValues.TEXTFONTVALUE, newSizeValue));		
+		elementsOnThis.getLoadButton().setFont(new Font(InitValues.TEXTFONTS, InitValues.TEXTFONTVALUE, newSizeValue));
+		elementsOnThis.getDefaultPane().setFont(new Font(InitValues.TEXTFONTS, InitValues.TEXTFONTVALUE, newSizeValue));
+		elementsOnThis.getTabbedPane().setFont(new Font(InitValues.TEXTFONTS, InitValues.TEXTFONTVALUE, newSizeValue));
+		
+		ArrayList<JPanel> jPanels = elementsOnThis.getjPanels();
+		for (JPanel jPanel : jPanels) {
+			Component[] components = jPanel.getComponents();
+			for (int i = 0; i < components.length; i++) {
+				Component component = components[i];
+				component.setFont(new Font(InitValues.TEXTFONTS, InitValues.TEXTFONTVALUE, newSizeValue));
+			}
+		}
 	}
 }

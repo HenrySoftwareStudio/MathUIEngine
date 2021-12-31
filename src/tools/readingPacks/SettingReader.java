@@ -34,6 +34,7 @@ public class SettingReader extends ReadingTool<SettingProperty> {
 				for (int i = 0; i < listOfSettings.getLength(); i++) {
 					Node lookingAt = listOfSettings.item(i);
 					if (lookingAt.getAttributes().getNamedItem("ID").getNodeValue().equals(propertyID)) {
+						System.out.println(lookingAt.getAttributes().getNamedItem("Value").getNodeValue());
 						return new SettingProperty(propertyID, lookingAt.getAttributes().getNamedItem("Value").getNodeValue());
 					}
 				}

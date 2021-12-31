@@ -17,7 +17,7 @@ public class OnStartUpEventSendder {
 	
 	public static void send() {
 		for (int i = 0; i < Subs.size(); i++) {
-			Subs.get(i).OnSUEvent();
+			Subs.get(i).onSUEvent();
 		}
 	}
 }
